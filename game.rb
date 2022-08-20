@@ -7,8 +7,10 @@ class Game
   ].freeze
 
   def initialize
-    @player1 = { name: nil, plays: [] }
-    @player2 = { name: nil, plays: [] }
+    @player1_name = nil
+    @player1_plays = []
+    @player2_name = nil
+    @player2_plays = []
     @board = Array.new(9)
   end
 
@@ -16,9 +18,9 @@ class Game
 
   def prompt_names
     print "Please enter you names\n(X) Player 1: "
-    @player1[:name] = gets.chomp
+    @player1_name = gets.chomp
     print '(O) Player 2: '
-    @player2[:name] = gets.chomp
+    @player2_name = gets.chomp
   end
 
   def prompt_play
@@ -31,10 +33,21 @@ class Game
     prompt.to_i
   end
 
-  def validate_play
-    # code here
+  def make_plays
+    @board.each_with_index do |_item, i|
+      prompt = prompt_play
+
+      # play validation, i.odd? are always player1's turns
+      if i.odd?
+        @player1_plays << prompt unless @player1_plays.include?(prompt)
+        puts @player1_plays
+      else
+        @player2_plays << prompt unless @player2_plays.include?(prompt)
+        puts @player2_plays
+      end
+    end
   end
 end
 
 game = Game.new
-game.prompt_plays
+game.make_plays
