@@ -34,16 +34,20 @@ class Game
   end
 
   def make_plays
-    @board.each_with_index do |_item, i|
+    i = 1
+    while i < 10
       prompt = prompt_play
 
       # play validation, i.odd? are always player1's turns
-      if i.odd?
-        @player1_plays << prompt unless @player1_plays.include?(prompt)
-        puts @player1_plays
-      else
-        @player2_plays << prompt unless @player2_plays.include?(prompt)
-        puts @player2_plays
+      unless @player1_plays.include?(prompt) && @player2_plays.include?(prompt)
+        i += 1
+        if i.odd?
+          @player1_plays.push prompt
+          p @player1_plays
+        else
+          @player2_plays.push prompt
+          p @player2_plays
+        end
       end
     end
   end
