@@ -11,7 +11,29 @@ class Game
     @player1_plays = []
     @player2_name = nil
     @player2_plays = []
-    @board = Array.new(9)
+    @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  end
+
+  def make_plays
+    i = 0
+    while i < 9
+      show_board
+      prompt = ''
+      # play validation, i.odd? are always player1's turns
+      unless @player1_plays.include?(prompt) && @player2_plays.include?(prompt)
+        i += 1
+        if i.odd?
+          prompt = prompt_play(@player1_name)
+          @player1_plays.push prompt
+          @board[prompt - 1] = 'X'
+        else
+          prompt = prompt_play(@player2_name)
+          @player2_plays.push prompt
+          @board[prompt - 1] = 'O'
+        end
+      end
+    end
+    show_board
   end
 
   # def play
@@ -23,33 +45,20 @@ class Game
     @player2_name = gets.chomp
   end
 
-  def prompt_play
+  def prompt_play(player_name)
     prompt = ''
-    until prompt.match(/[0-8]/) && prompt.size == 1
+    until prompt.match(/[1-9]/) && prompt.size == 1
+      print "#{player_name}, it's your turn!\nPlay: "
       prompt = gets.chomp
-      prompt.match?(/[0-8]/)
-      p prompt
     end
     prompt.to_i
   end
 
-  def make_plays
-    i = 1
-    while i < 10
-      prompt = prompt_play
-
-      # play validation, i.odd? are always player1's turns
-      unless @player1_plays.include?(prompt) && @player2_plays.include?(prompt)
-        i += 1
-        if i.odd?
-          @player1_plays.push prompt
-          p @player1_plays
-        else
-          @player2_plays.push prompt
-          p @player2_plays
-        end
-      end
-    end
+  def show_board
+    puts 'Make your play by picking a number between 1 and 9.'
+    puts "\n #{@board[0]} | #{@board[1]} | #{@board[2]} \n---+---+---"
+    puts " #{@board[3]} | #{@board[4]} | #{@board[5]} \n---+---+---"
+    puts " #{@board[6]} | #{@board[7]} | #{@board[8]} \n\n"
   end
 end
 
