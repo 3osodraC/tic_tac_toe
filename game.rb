@@ -53,7 +53,7 @@ class Game
 
   def prompt_play(player_name)
     prompt = ''
-    until prompt.match(/[1-9]/) && prompt.size == 1 && !@player1_plays.include?(prompt)
+    until prompt.match(/[1-9]/) && prompt.size == 1 && !@player1_plays.include?(prompt) && !@player2_plays.include?(prompt)
       print "#{player_name}, it's your turn!\nPlay: "
       prompt = gets.chomp
     end
@@ -69,11 +69,13 @@ class Game
 
   def win?(name, plays)
     WIN_STATES.each do |item|
+      # still doesn't work...
+      plays_dummy = plays.select { |element| element == item }
+
       p item
-      p plays
-      # this doesn't work. maybe make a copy of plays, remove all unmatching
-      # items and check if they are identical?
-      if plays.include?(item)
+      p plays_dummy
+
+      if plays_dummy.eql?(item)
         @winner = name
         return true
       end
