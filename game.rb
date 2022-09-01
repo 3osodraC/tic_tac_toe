@@ -3,7 +3,7 @@ class Game
   WIN_STATES = [
     [1, 2, 3], [4, 5, 6], [7, 8, 9], # horizontal
     [1, 4, 7], [2, 5, 8], [3, 6, 9], # vertical
-    [1, 5, 9], [3, 6, 7]             # diagonal
+    [1, 5, 9], [3, 5, 7]             # diagonal
   ].freeze
 
   def initialize
@@ -70,10 +70,14 @@ class Game
   def win?(name, plays)
     WIN_STATES.each do |item|
       # still doesn't work...
-      plays_dummy = plays.select { |element| element == item }
+      plays_dummy = plays
+      item.each do |i|
+        plays_dummy = plays_dummy.reject { |element| i == element }
+      end
 
-      p item
-      p plays_dummy
+      puts "\nitem: #{item}"
+      puts "\nplays: #{plays}"
+      puts "dummy: #{plays_dummy}\n\n"
 
       if plays_dummy.eql?(item)
         @winner = name
