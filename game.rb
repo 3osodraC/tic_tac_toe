@@ -18,7 +18,7 @@ class Game
   def make_plays
     i = 1
     while i < 10
-      show_board
+      display_board
       play = ''
       # play validation, i.odd? are player1's turns
       if i.odd?
@@ -40,7 +40,7 @@ class Game
     prompt_names
     puts 'Make your play by picking a number between 1 and 9.'
     make_plays
-    show_board
+    display_board
     puts "#{@winner} wins! Thank you for playing."
   end
 
@@ -61,7 +61,7 @@ class Game
     prompt.to_i
   end
 
-  def show_board
+  def display_board
     puts '----------------------------------------------------'
     puts "\n #{@board[0]} | #{@board[1]} | #{@board[2]} \n---+---+---"
     puts " #{@board[3]} | #{@board[4]} | #{@board[5]} \n---+---+---"
