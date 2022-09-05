@@ -57,6 +57,7 @@ class Game
       print "#{player_name}, it's your turn!\nPlay: "
       prompt = gets.chomp
     end
+    puts "\n"
     prompt.to_i
   end
 
@@ -69,15 +70,11 @@ class Game
 
   def win?(name, plays)
     WIN_STATES.each do |item|
-      # still doesn't work...
-      plays_dummy = plays
+      plays_dummy = []
       item.each do |i|
-        plays_dummy = plays_dummy.reject { |element| i == element }
+        plays_dummy << plays.select { |element| element == i }
       end
-
-      puts "\nitem: #{item}"
-      puts "\nplays: #{plays}"
-      puts "dummy: #{plays_dummy}\n\n"
+      plays_dummy.flatten!
 
       if plays_dummy.eql?(item)
         @winner = name
