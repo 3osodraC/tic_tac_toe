@@ -19,17 +19,17 @@ class Game
     i = 1
     while i < 10
       display_board
-      play = ''
+      move = ''
       # play validation, i.odd? are player1's turns
       if i.odd?
-        play = prompt_play(@player1_name)
-        @player1_plays.push play
-        @board[play - 1] = 'X'
+        move = prompt_play(@player1_name)
+        @player1_plays.push move
+        @board[move - 1] = 'X'
         break if win?(@player1_name, @player1_plays)
       else
-        play = prompt_play(@player2_name)
-        @player2_plays.push play
-        @board[play - 1] = 'O'
+        move = prompt_play(@player2_name)
+        @player2_plays.push move
+        @board[move - 1] = 'O'
         break if win?(@player2_name, @player2_plays)
       end
       i += 1
