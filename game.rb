@@ -70,7 +70,7 @@ class Game
 
   def valid_prompt?(prompt)
     valid = nil
-    valid = true if prompt.match(/[1-9]/) && prompt.size == 1 && @board[prompt.to_i].is_a?(Integer)
+    valid = true if prompt.match(/[1-9]/) && prompt.size == 1 && @board[prompt.to_i - 1].is_a?(Integer)
     valid
   end
 
