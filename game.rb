@@ -53,7 +53,7 @@ class Game
 
   def prompt_play(player_name)
     prompt = ''
-    until prompt.match(/[1-9]/) && prompt.size == 1 && !@player1_plays.include?(prompt) && !@player2_plays.include?(prompt)
+    until valid_prompt?(@player1_plays, prompt) && valid_prompt?(@player2_plays, prompt)
       print "#{player_name}, it's your turn!\nPlay: "
       prompt = gets.chomp
     end
@@ -66,6 +66,13 @@ class Game
     puts "\n #{@board[0]} | #{@board[1]} | #{@board[2]} \n---+---+---"
     puts " #{@board[3]} | #{@board[4]} | #{@board[5]} \n---+---+---"
     puts " #{@board[6]} | #{@board[7]} | #{@board[8]} \n\n"
+  end
+
+  def valid_prompt?(plays, prompt)
+    valid = nil
+    valid = true if prompt.match(/[1-9]/) && prompt.size == 1
+    plays.each { |i| valid = false if i == prompt }
+    valid
   end
 
   def win?(name, plays)
