@@ -53,7 +53,7 @@ class Game
 
   def prompt_play(player_name)
     prompt = ''
-    until valid_prompt?(@player1_plays, prompt) && valid_prompt?(@player2_plays, prompt)
+    until valid_prompt?(prompt)
       print "#{player_name}, it's your turn!\nPlay: "
       prompt = gets.chomp
     end
@@ -68,10 +68,9 @@ class Game
     puts " #{@board[6]} | #{@board[7]} | #{@board[8]} \n\n"
   end
 
-  def valid_prompt?(plays, prompt)
+  def valid_prompt?(prompt)
     valid = nil
-    valid = true if prompt.match(/[1-9]/) && prompt.size == 1
-    plays.each { |i| valid = false if i == prompt }
+    valid = true if prompt.match(/[1-9]/) && prompt.size == 1 && @board[prompt.to_i].is_a?(Integer)
     valid
   end
 
