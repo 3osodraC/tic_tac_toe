@@ -2,4 +2,4 @@
 
 ## Simple command line Tic Tac Toe
 <br>
-(There are still some bugs to iron out but it's functional)
+(There might be some bugs to iron out but it's functional as far as I tested it.)
